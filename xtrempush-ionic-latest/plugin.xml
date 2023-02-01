@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	id="com.xtreme.plugins.XtremePush"
+	version="4.3.3"
+	onLoad="true" >
+
+	<name>XtremePush</name>
+	<author>Xtreme Push</author>
+
+	<description>
+		Plugin allows integration with Xtreme Push provider.
+	</description>
+
+	<license>MIT</license>
+
+	<js-module src="www/xtremepush.js" name="XtremePush">
+		<clobbers target="XtremePush" />
+	</js-module>
+
+	<engines>
+		<engine name="cordova" version=">=4.0.0" />
+	</engines>
+    
+
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="XtremePush">
+                <param name="android-package" value="com.xtreme.plugins.XtremePushPlugin" />
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+        <!-- your configuration elements, references, source files, etc... -->
+        <source-file src="src/android/XtremePushPlugin.java" target-dir="src/com/xtreme/plugins/" />
+        <framework src="src/android/XPush.gradle" custom="true" type="gradleReference" />
+        <resource-file src="lib/android/xpush_android_lib/XtremePush_lib.aar" target="lib/android/xpush_android_lib/XtremePush_lib.aar"  />
+        
+        <config-file target="AndroidManifest.xml" parent="/manifest">
+            <!-- REQUIRED for xtremepush -->
+            <uses-permission android:name="android.permission.INTERNET" />
+            <!-- Keeps the processor from sleeping when a message is received. -->
+            <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+            <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+            <!-- OPTIONAL xtremepush settings-->
+            <!-- REQUIRED for Geo-location & iBeacon -->
+            <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+            <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+            <!-- REQUIRED for iBeacon -->
+            <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+            <uses-feature
+                    android:name="android.hardware.bluetooth_le"
+                    android:required="false" />
+        </config-file>
+        
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+
+            <activity
+                    android:name="ie.imobile.extremepush.ui.InboxActivity"
+                    android:configChanges="orientation|screenSize"
+                    android:label="@string/title_activity_inbox"
+                    android:theme="@style/Theme.Transparent" />
+            <activity
+                    android:name="ie.imobile.extremepush.ui.OnclickPushActivity"
+                    android:exported="false"
+                    android:taskAffinity="" />
+            <activity
+                    android:name="ie.imobile.extremepush.ui.WebViewActivity"
+                    android:exported="false" />
+            <activity
+                    android:name="ie.imobile.extremepush.ui.LocationDialogActivity"
+                    android:exported="false"
+                    android:label="Locations are not available"
+                    android:theme="@android:style/Theme.Dialog" />
+<!--            <service android:name="ie.imobile.extremepush.NotificationOnClickHandlerService" />-->
+            <service
+                    android:name="ie.imobile.extremepush.util.ImageHandlerJobService"
+                    android:permission="android.permission.BIND_JOB_SERVICE" />
+            <receiver android:name="ie.imobile.extremepush.receivers.XP_App_Update_Receiver"
+                      android:exported= "false">
+                <intent-filter >
+                    <action   android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+                    <category android:name="." />
+                </intent-filter>
+            </receiver>
+
+            <!-- REQUIRED for Push, Geo-location & iBeacon -->
+            <receiver android:name="ie.imobile.extremepush.receivers.CoreBroadcastReceiver"
+                      android:exported= "false">
+                <intent-filter>
+                    <action android:name="ie.imobile.extremepush.BEACON_SERVICE_STARTED" />
+                    <action android:name="ie.imobile.extremepush.COMMAND" />
+                    <category android:name="." />
+                </intent-filter>
+                <intent-filter>
+                    <action android:name="android.intent.action.BOOT_COMPLETED" />
+                    <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+                    <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+                </intent-filter>
+            </receiver>
+
+
+            <!-- REQUIRED for Push -->
+            <service
+                    android:name="ie.imobile.extremepush.google.XPFirebaseMessagingService"
+                    android:exported= "false">
+                <intent-filter>
+                    <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                </intent-filter>
+            </service>
+
+
+            <!-- REQUIRED for Geo-location -->
+            <service android:name="ie.imobile.extremepush.location.GeoLocationService" />
+            <receiver
+                    android:name="ie.imobile.extremepush.location.GeoLocationBroadcastReceiver"
+                    android:exported="false" />
+            <receiver
+                    android:name="ie.imobile.extremepush.location.ProxymityAlertReceiver"
+                    android:exported="false" />
+
+
+            <!-- REQUIRED for iBeacon -->
+            <service
+                    android:name="org.altbeacon.beacon.service.BeaconService"
+                    android:enabled="true"
+                    android:exported="false"
+                    android:isolatedProcess="false"
+                    android:label="beacon" />
+            <service
+                    android:name="org.altbeacon.beacon.BeaconIntentProcessor"
+                    android:enabled="true"
+                    android:exported="false" />
+            <!-- EDIT END -->
+            <service android:name="ie.imobile.extremepush.beacons.BeaconLocationService"
+                     android:exported= "false"/>
+            <service
+                    android:name="ie.imobile.extremepush.beacons.XPBeaconJobService"
+                    android:permission="android.permission.BIND_JOB_SERVICE" />
+            <receiver
+                    android:name="ie.imobile.extremepush.beacons.BeaconLocationReceiver"
+                    android:exported="true" />
+
+
+
+        </config-file>
+
+     </platform>
+    
+    
+	<platform name="ios">
+		<config-file target="config.xml" parent="/*">
+			<feature name="XtremePush">
+				<param name="ios-package" value="XtremePushPlugin"/>
+				<param name="onload" value="true" />
+			</feature>
+		</config-file>
+
+		<framework src="Security.framework" />
+		<framework src="CFNetwork.framework" />
+		<framework src="MobileCoreServices.framework" />
+		<framework src="CoreTelephony.framework" />
+		<framework src="SystemConfiguration.framework" />
+		<framework src="CoreLocation.framework" />
+		<framework src="CoreBluetooth.framework" />
+		<framework src="libz.dylib" />
+        <framework src="lib/ios/XPush.framework" custom = "true" />
+
+		<!-- EDIT: Required for Attributions and IDFA collection -->
+		<!-- <framework src="AdSupport.framework" /> -->
+		<!-- EDIT END -->
+
+		<source-file src="src/ios/AppDelegate+XtremePush.m" />
+		<source-file src="src/ios/Storage.m" />
+		<source-file src="src/ios/XtremePushPlugin.m" />
+		<header-file src="src/ios/AppDelegate+XtremePush.h" />
+		<header-file src="src/ios/Storage.h" />
+		<header-file src="src/ios/XtremePushPlugin.h" />
+        
+<!--        <source-file src="lib/ios/libXPush.a" framework="true" />-->
+<!--        <header-file src="lib/ios/XPAction.h" />-->
+<!--        <header-file src="lib/ios/XPMessage.h" />-->
+<!--        <header-file src="lib/ios/XPMessageResponse.h" />-->
+<!--        <header-file src="lib/ios/XPMessageResponseNotification.h" />-->
+<!--        <header-file src="lib/ios/XPPublicConstants.h" />-->
+<!--        <header-file src="lib/ios/XPush.h" />-->
+	</platform>
+</plugin>
