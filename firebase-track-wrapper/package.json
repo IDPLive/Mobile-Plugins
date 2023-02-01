@@ -1,0 +1,53 @@
+{
+  "_from": "@ionic-native/firebase-analytics",
+  "_id": "@ionic-native/firebase-analytics@5.27.0",
+  "_inBundle": false,
+  "_integrity": "sha512-ft8ob+PkRWS7tE1cd1ICXV5KYM7u1hqqN4tLBS+20UO9wyhnJWAbts1DN8LYiAvGkIMOt6P3pTHg4r8dHodd6A==",
+  "_location": "/@ionic-native/firebase-analytics",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "@ionic-native/firebase-analytics",
+    "name": "@ionic-native/firebase-analytics",
+    "escapedName": "@ionic-native%2ffirebase-analytics",
+    "scope": "@ionic-native",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/@ionic-native/firebase-analytics/-/firebase-analytics-5.27.0.tgz",
+  "_shasum": "464420eeb306043a54b59fc9feb4b8a981fa4e19",
+  "_spec": "@ionic-native/firebase-analytics",
+  "_where": "D:\\IDP APP\\SP REFACTOR CODE",
+  "author": {
+    "name": "ionic"
+  },
+  "bugs": {
+    "url": "https://github.com/ionic-team/ionic-native/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "@types/cordova": "latest"
+  },
+  "deprecated": false,
+  "description": "Ionic Native - Native plugins for ionic apps",
+  "homepage": "https://github.com/ionic-team/ionic-native#readme",
+  "license": "MIT",
+  "module": "index.js",
+  "name": "@ionic-native/firebase-analytics",
+  "peerDependencies": {
+    "rxjs": "^5.5.0 || ^6.5.0",
+    "@ionic-native/core": "^5.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ionic-team/ionic-native.git"
+  },
+  "typings": "index.d.ts",
+  "version": "5.27.0"
+}
