@@ -1,0 +1,54 @@
+{
+  "_from": "@awesome-cordova-plugins/image-picker@^5.39.0",
+  "_id": "@awesome-cordova-plugins/image-picker@5.39.0",
+  "_inBundle": false,
+  "_integrity": "sha512-HE3311X5SrUvP2oIOZEceODUNDHUgk07slr5N/inTxVRHCzKiK2DQV4KpeIVVX3sCktq/EQ67hc/jAETJ3d3Sw==",
+  "_location": "/@awesome-cordova-plugins/image-picker",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "@awesome-cordova-plugins/image-picker@^5.39.0",
+    "name": "@awesome-cordova-plugins/image-picker",
+    "escapedName": "@awesome-cordova-plugins%2fimage-picker",
+    "scope": "@awesome-cordova-plugins",
+    "rawSpec": "^5.39.0",
+    "saveSpec": null,
+    "fetchSpec": "^5.39.0"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/@awesome-cordova-plugins/image-picker/-/image-picker-5.39.0.tgz",
+  "_shasum": "cb073d8eb2aa1c19178a4addc49c6fee1d4d1f41",
+  "_spec": "@awesome-cordova-plugins/image-picker@^5.39.0",
+  "_where": "/Users/kalaiprakash/Desktop/study-abroad-mp",
+  "author": {
+    "name": "ionic"
+  },
+  "bugs": {
+    "url": "https://github.com/danielsogl/awesome-cordova-plugins/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "@types/cordova": "latest"
+  },
+  "deprecated": false,
+  "description": "Awesome Cordova Plugins - Native plugins for ionic apps",
+  "homepage": "https://github.com/danielsogl/awesome-cordova-plugins#readme",
+  "license": "MIT",
+  "main": "bundle.js",
+  "module": "index.js",
+  "name": "@awesome-cordova-plugins/image-picker",
+  "peerDependencies": {
+    "rxjs": "^5.5.0 || ^6.5.0 || ^7.3.0",
+    "@awesome-cordova-plugins/core": "^5.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danielsogl/awesome-cordova-plugins.git"
+  },
+  "typings": "index.d.ts",
+  "version": "5.39.0"
+}
