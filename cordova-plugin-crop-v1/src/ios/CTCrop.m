@@ -91,9 +91,8 @@
     NSString* filePath = [self tempFilePath:@"jpg"];
     CDVPluginResult *result;
     NSError *err;
-    
-    // save file
-    if (![data writeToFile:filePath options:NSAtomicWrite error:&err]) {
+    [self CreateDirectory:filePath];
+    if (![data writeToFile:filePath atomically:YES]) {
         result = [CDVPluginResult resultWithStatus:CDVCommandStatus_IO_EXCEPTION messageAsString:[err localizedDescription]];
     }
     else {
@@ -102,6 +101,19 @@
     
     [self.commandDelegate sendPluginResult:result callbackId:self.callbackId];
     self.callbackId = nil;
+}
+- (void)CreateDirectory:(NSString *)string {
+    @try {
+        NSString *fileDirectory = [string stringByDeletingLastPathComponent];
+        NSString *fullFilePath = [NSString stringWithFormat:@"%@", fileDirectory];
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        NSError *error;
+        if(![fileManager fileExistsAtPath:fullFilePath]) {
+            [fileManager createDirectoryAtPath:fullFilePath withIntermediateDirectories:YES attributes:nil error:&error];
+        }
+    } @catch (NSException *exception) {
+        NSLog(@"Creating directory is failed...");
+    }
 }
 
 - (void)cropViewControllerDidCancel:(PECropViewController *)controller {
