@@ -40,10 +40,10 @@
   "license": "MIT",
   "main": "bundle.js",
   "module": "index.js",
-  "name": "@awesome-cordova-plugins/image-picker",
+  "name": "image-picker-wrapper-1",
   "peerDependencies": {
     "rxjs": "^5.5.0 || ^6.5.0 || ^7.3.0",
-    "@awesome-cordova-plugins/core": "^5.1.0"
+    "@awesome-cordova-plugins/core": "^6.3.0"
   },
   "repository": {
     "type": "git",
